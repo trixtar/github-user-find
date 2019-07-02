@@ -16,6 +16,10 @@ export default class App extends Component {
     results: [],
   }
 
+  componentWillUnmount() {
+    if (this.searchTimeout) clearTimeout(this.searchTimeout);
+  }
+
   getResults = (query) => {
     console.log(query);
     if (!query) {
@@ -34,9 +38,14 @@ export default class App extends Component {
   }
 
   handleChange = (e) => {
-    // store search query in state
+    // reset timeout (if any)
+    if (this.searchTimeout) clearTimeout(this.searchTimeout);
+    // store search query
     this.query = e.target.value;
-    this.getResults(this.query);
+    this.searchTimeout = setTimeout(() => {
+      // fire query only after user stops typing
+      this.getResults(this.query);
+    }, 700);
   }
 
   render() {
