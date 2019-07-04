@@ -21,7 +21,6 @@ export default class App extends Component {
   }
 
   getResults = (query) => {
-    //console.log(query);
     if (!query) {
       this.setState({results: []});
       return;
@@ -29,6 +28,7 @@ export default class App extends Component {
     
     // update url from user query
     const url = `https://api.github.com/search/users?q=${query}`
+
     // get all query results @ github user search endpoint
     fetch(url)
       .then(
@@ -46,6 +46,7 @@ export default class App extends Component {
   handleChange = (e) => {
     // reset timeout (if any)
     if (this.searchTimeout) clearTimeout(this.searchTimeout);
+
     // store search query
     this.query = e.target.value;
     this.searchTimeout = setTimeout(() => {
@@ -55,9 +56,8 @@ export default class App extends Component {
   }
 
   render() {
-    console.log('results', this.state.results);
     return (
-      <div className='container app'>
+      <div className='container bg-light app'>
         <SearchBox onChange={this.handleChange} />
         <SearchResults users={this.state.results} />
       </div>

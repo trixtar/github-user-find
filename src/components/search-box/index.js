@@ -1,19 +1,26 @@
 import React from 'react';
+import octicon from './assets/octicon.svg'
 import '../../App.css';
 
 function SearchBox(props) {
 	const {onChange} = props;
 	return (
-		<div className='row search-box'>
+		<div className='row py-3 px-4 bg-dark search-box'>
 			<div className='col-2'>
 				<img
-					src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
+					src={octicon}
 					alt='Github logo'
 					width={32}
 					height={32}
 				/>
 			</div>
-			<input className='col-10' type='search' name='search' placeholder='Search' onChange={onChange} />
+			<input
+				className='col-10 form-control'
+				type='search'
+				name='search'
+				placeholder='Search'
+				onChange={onChange}
+			/>
 		</div>
 	)
 }

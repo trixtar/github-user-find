@@ -43,14 +43,17 @@ export default class ListedUser extends Component {
         const {username} = this.props;
         const {avatar_url, name, bio, url} = this.state.user;
         return (
-            <div className='row mb-1 p-1 border border-primary rounded' onClick={this.handleClick(url)}>
+            <div
+                className='row d-flex align-items-center mb-1 p-1 border border-secondary rounded'
+                onClick={this.handleClick(url)}
+            >
                 <div className='col-3'>
                     <img className='img-thumbnail' src={avatar_url} alt={`${username}'s avatar`} />
                 </div>
-                <div className='col-9 d-flex align-items-center'>
-                    <p>{username}</p>
+                <div className='col-9 d-flex flex-column'>
+                    <h6 className='text-primary'>{username}</h6>
                     <p>{name}</p>
-                    <p>{bio}</p>
+                    <p><small>{bio}</small></p>
                 </div>
             </div>
         );
