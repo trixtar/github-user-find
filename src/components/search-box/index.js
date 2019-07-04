@@ -6,7 +6,7 @@ function SearchBox(props) {
 	const {onChange} = props;
 	return (
 		<div className='row py-3 px-4 bg-dark search-box'>
-			<div className='col-2'>
+			<div className='col-2 d-flex justify-content-center align-items-center'>
 				<img
 					src={octicon}
 					alt='Github logo'

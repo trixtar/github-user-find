@@ -44,16 +44,16 @@ export default class ListedUser extends Component {
         const {avatar_url, name, bio, url} = this.state.user;
         return (
             <div
-                className='row d-flex align-items-center mb-1 p-1 border border-secondary rounded'
+                className='row d-flex align-items-center mb-2 p-2 bg-white border border-secondary rounded'
                 onClick={this.handleClick(url)}
             >
                 <div className='col-3'>
                     <img className='img-thumbnail' src={avatar_url} alt={`${username}'s avatar`} />
                 </div>
                 <div className='col-9 d-flex flex-column'>
-                    <h6 className='text-primary'>{username}</h6>
-                    <p>{name}</p>
-                    <p><small>{bio}</small></p>
+                    <h6 className='mb-1 text-primary'>{username}</h6>
+                    <h6 className='mb-1'>{name}</h6>
+                    <p className='mb-0'><small>{bio}</small></p>
                 </div>
             </div>
         );
