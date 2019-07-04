@@ -1,46 +1,58 @@
 import React, {Component} from 'react';
 
 export default class ListedUser extends Component {
-	constructor(props) {
-		super(props);
+    constructor(props) {
+        super(props);
 
-		this.handleClick = this.handleClick.bind(this);
-	};
+        this.handleClick = this.handleClick.bind(this);
+    };
 
-	/*
-	state = {
-		user: {},
-	}
+    state = {
+        user: {},
+    }
 
-	componentDidMount() {
-		const url = `https://api.github.com/users/:${this.props.username}`;
-		fetch(url)
-			.then(data => data.json())
-			.then(res => {
-				console.log('user res', res);
-				this.setState({user: res}, () => console.log(this.state.user));
-			})
-			.catch(err => console.log(err));
-	}
-	*/
+    componentDidMount() {
+        // set up request header
+        const token = '3d87f6ba7b8a97d28bedd66e8dcf86e3c45b363f';
+        const options = {
+            headers: {
+               'Authorization': `Basic ${token}`,
+            },
+        };
 
-	handleClick(link) {
-		return () => {
-			window.location.href = link
-		};
-	}
+        fetch(`https://api.github.com/users/${this.props.username}`, options)
+            .then(
+                data => data.json(),
+                err => console.error(`Error fetching: ${err}`)
+            )
+            .then(
+                res => this.setState({user: res}),
+                err => console.error(`Error parsing: ${err}`)
+            );
+    }
 
-	render() {
-		const {username, avatar, userpage} = this.props;
-		return (
-			<div className='row mb-1 p-1 border border-primary rounded' onClick={this.handleClick(userpage)}>
-				<div className='col-3'>
-					<img className='img-thumbnail' src={avatar} alt={`${username}'s avatar`} />
-				</div>
-				<div className='col-9 d-flex align-items-center'>
-					{username}
-				</div>
-			</div>
-		);
-	}
+    handleClick(link) {
+        return () => {
+            window.location.href = link
+        };
+    }
+
+    render() {
+        if (!Object.keys(this.state.user).length) return null;
+
+        const {username} = this.props;
+        const {avatar_url, name, bio, url} = this.state.user;
+        return (
+            <div className='row mb-1 p-1 border border-primary rounded' onClick={this.handleClick(url)}>
+                <div className='col-3'>
+                    <img className='img-thumbnail' src={avatar_url} alt={`${username}'s avatar`} />
+                </div>
+                <div className='col-9 d-flex align-items-center'>
+                    <p>{username}</p>
+                    <p>{name}</p>
+                    <p>{bio}</p>
+                </div>
+            </div>
+        );
+    }
 }

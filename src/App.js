@@ -8,8 +8,8 @@ export default class App extends Component {
   query = '';
   constructor(props) {
     super(props);
-    this.getResults = this.getResults.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.getResults = this.getResults.bind(this);
   };
 
   state = {
@@ -21,20 +21,26 @@ export default class App extends Component {
   }
 
   getResults = (query) => {
-    console.log(query);
+    //console.log(query);
     if (!query) {
       this.setState({results: []});
       return;
     }
+    
     // update url from user query
     const url = `https://api.github.com/search/users?q=${query}`
     // get all query results @ github user search endpoint
     fetch(url)
-      .then(data => data.json())
-      .then(res => {
-        if (res && res.items && query === this.query) this.setState({results: res.items.slice(0,10)});
-      })
-      .catch(err => console.log(err));
+      .then(
+        data => data.json(),
+        err => console.error(`Error fetching: ${err}`)
+      )
+      .then(
+        res => {
+          if (res && res.items && query === this.query) this.setState({results: res.items.slice(0,10)});
+        },
+        err => console.error(`Error fetching: ${err}`)
+      );
   }
 
   handleChange = (e) => {

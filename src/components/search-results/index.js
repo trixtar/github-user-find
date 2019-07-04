@@ -8,14 +8,7 @@ export default class SearchResults extends Component {
 		if (!users.length) return <div>No results yet!</div>
 		return(
 			<div className='container results-list'>
-				{users.map(user => 
-					<ListedUser
-						key={user.login}
-						username={user.login}
-						avatar={user.avatar_url}
-						userpage={user.html_url}
-					/>
-				)}
+				{users.map(user => <ListedUser key={user.login} username={user.login} />)}
 			</div>
 		)
 	}
