@@ -57,7 +57,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className='container bg-light app'>
+      <div className='container-fluid bg-light app'>
         <SearchBox onChange={this.handleChange} />
         <SearchResults users={this.state.results} />
       </div>

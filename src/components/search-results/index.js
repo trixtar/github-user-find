@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import ListedUser from './listed-user';
-import '../../App.css';
 
 export default class SearchResults extends Component {
     render() {
