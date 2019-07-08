@@ -50,14 +50,14 @@ export default class ListedUser extends Component {
         if (!Object.keys(this.state.user).length) return null;
 
         const {username} = this.props;
-        const {avatar_url, name, bio, url} = this.state.user;
+        const {avatar_url, name, bio, html_url} = this.state.user;
         const hover = this.state.hover ? 'border-primary' : 'border-secondary';
         return (
             <div
                 className={`row d-flex align-items-center mb-2 p-2 bg-white border rounded cursor-pointer ${hover}`}
                 onMouseEnter={this.handleHover(true)}
                 onMouseLeave={this.handleHover(false)}
-                onClick={this.handleClick(url)}
+                onClick={this.handleClick(html_url)}
             >
                 <div className='col-3 col-sm-2 col-lg-1 px-0'>
                     <img className='img-thumbnail' src={avatar_url} alt={`${username}'s avatar`} />
